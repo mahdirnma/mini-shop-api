@@ -19,4 +19,11 @@ class ProductService
             return Product::create($request);
         });
     }
+
+    public function getProduct($user)
+    {
+        return app(TryService::class)(function () use ($user){
+            return $user;
+        });
+    }
 }

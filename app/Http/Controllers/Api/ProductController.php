@@ -42,7 +42,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $result=$this->service->getProduct($product);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('product showed successfully')->data(new ProductResource($result->data)):
+            (new ApiResponseBuilder())->message('product not showed successfully')->data($result->data);
+        return $apiResponse->response();
     }
 
     /**
