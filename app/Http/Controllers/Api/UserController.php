@@ -65,6 +65,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $result=$this->service->deleteUser($user);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('User deleted successfully'):
+            (new ApiResponseBuilder())->message('User not created successfully');
+        return $apiResponse->response();
     }
 }

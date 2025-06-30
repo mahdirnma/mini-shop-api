@@ -29,4 +29,9 @@ class UserService
             return $user->update($request);
         });
     }
+    public function deleteUser($user){
+        return app(TryService::class)(function () use ($user){
+            return $user->update(['is_active'=>0]);
+        });
+    }
 }
