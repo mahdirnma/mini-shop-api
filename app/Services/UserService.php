@@ -16,6 +16,12 @@ class UserService
         return app(TryService::class)(function () use ($user){
             return User::create($user);
         });
+    }
 
+    public function getUser($user)
+    {
+        return app(TryService::class)(function () use ($user){
+            return $user;
+        });
     }
 }
