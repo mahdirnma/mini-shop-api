@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Services\ApiResponseBuilder;
@@ -52,9 +53,13 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $result=$this->service->updateProduct($request->validated(), $product);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('product updated successfully')->data(new ProductResource($product)):
+            (new ApiResponseBuilder())->message('product not updated successfully')->data($result->data);
+        return $apiResponse->response();
     }
 
     /**

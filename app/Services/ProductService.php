@@ -26,4 +26,11 @@ class ProductService
             return $user;
         });
     }
+
+    public function updateProduct($request,$product)
+    {
+        return app(TryService::class)(function () use ($request,$product){
+            return $product->update($request);
+        });
+    }
 }
