@@ -12,4 +12,11 @@ class ProductService
             return Product::where('is_active',1)->get();
         });
     }
+
+    public function setProduct($request)
+    {
+        return app(TryService::class)(function () use ($request){
+            return Product::create($request);
+        });
+    }
 }
