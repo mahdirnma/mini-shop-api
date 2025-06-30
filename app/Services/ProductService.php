@@ -33,4 +33,9 @@ class ProductService
             return $product->update($request);
         });
     }
+    public function deleteProduct($user){
+        return app(TryService::class)(function () use ($user){
+            return $user->update(['is_active'=>0]);
+        });
+    }
 }
